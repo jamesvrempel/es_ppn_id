@@ -1,0 +1,17 @@
+{
+ "actions": [], "allow_rename": 0, "creation": "2026-08-20 09:00:00.000000",
+ "doctype": "DocType", "editable_grid": 1, "engine": "InnoDB", "istable": 1,
+ "field_order": ["line","line_description","section","dpp_amount","ppn_amount","is_derived","is_editable"],
+ "fields": [
+  {"fieldname":"line","fieldtype":"Data","label":"Line","in_list_view":1,"columns":1,"read_only":1},
+  {"fieldname":"line_description","fieldtype":"Data","label":"Description","in_list_view":1,"columns":5,"read_only":1},
+  {"fieldname":"section","fieldtype":"Select","label":"Part","options":"Penyerahan\nPajak Masukan\nPerhitungan\nPPh","read_only":1},
+  {"fieldname":"dpp_amount","fieldtype":"Currency","label":"DPP","in_list_view":1,"columns":2},
+  {"fieldname":"ppn_amount","fieldtype":"Currency","label":"PPN","in_list_view":1,"columns":2},
+  {"fieldname":"is_derived","fieldtype":"Check","label":"Derived","read_only":1},
+  {"fieldname":"is_editable","fieldtype":"Check","label":"Editable","read_only":1}
+ ],
+ "links": [], "modified": "2026-08-20 09:00:00.000000", "modified_by": "Administrator",
+ "module": "ES PPN ID", "name": "ES PPN Return Line", "owner": "Administrator",
+ "permissions": [], "sort_field": "idx", "sort_order": "ASC", "states": []
+}

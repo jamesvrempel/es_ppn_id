@@ -1,0 +1,28 @@
+{
+ "actions": [], "allow_rename": 0, "autoname": "field:treatment_name",
+ "creation": "2026-08-20 09:00:00.000000", "doctype": "DocType", "engine": "InnoDB",
+ "field_order": ["treatment_name","description","column_break_1","ppn_applicable","creditable","section_rate","ppn_rate","dpp_numerator","column_break_2","dpp_denominator","effective_rate_html","section_spt","spt_sales_line","spt_purchase_line","column_break_3","faktur_code","regional_rate"],
+ "fields": [
+  {"fieldname":"treatment_name","fieldtype":"Data","label":"Treatment","reqd":1,"unique":1,"in_list_view":1},
+  {"fieldname":"description","fieldtype":"Small Text","label":"Description","in_list_view":1},
+  {"fieldname":"column_break_1","fieldtype":"Column Break"},
+  {"fieldname":"ppn_applicable","fieldtype":"Check","label":"PPN Applicable","description":"Tick only where PPN is actually charged or claimed."},
+  {"fieldname":"creditable","fieldtype":"Check","label":"Input VAT Creditable","default":"1","description":"Untick for input VAT that cannot be credited (Pajak Masukan tidak dapat dikreditkan)."},
+  {"fieldname":"section_rate","fieldtype":"Section Break","label":"Rate"},
+  {"fieldname":"ppn_rate","fieldtype":"Percent","label":"Statutory Rate","default":"12","depends_on":"ppn_applicable","description":"The rate in the law. 12 since 1 January 2025."},
+  {"fieldname":"dpp_numerator","fieldtype":"Float","label":"DPP Numerator","default":"11","depends_on":"ppn_applicable","description":"Numerator of the DPP Nilai Lain fraction. 11 for the standard 11/12 base."},
+  {"fieldname":"column_break_2","fieldtype":"Column Break"},
+  {"fieldname":"dpp_denominator","fieldtype":"Float","label":"DPP Denominator","default":"12","depends_on":"ppn_applicable","description":"Denominator of the DPP Nilai Lain fraction. Set both to 12 for the full-rate base used by luxury goods."},
+  {"fieldname":"effective_rate_html","fieldtype":"HTML","options":"<p class='text-muted'>Effective rate = statutory rate x numerator / denominator. 12% on an 11/12 base is 11% of the selling price.</p>"},
+  {"fieldname":"section_spt","fieldtype":"Section Break","label":"SPT Masa PPN 1111"},
+  {"fieldname":"spt_sales_line","fieldtype":"Select","label":"Delivery Line","options":"\nI.A.1\nI.A.2\nI.A.3\nI.A.4\nI.A.5\nI.B","description":"Where deliveries under this treatment are reported in Part I."},
+  {"fieldname":"spt_purchase_line","fieldtype":"Select","label":"Input VAT Line","options":"\nII.A\nII.B","description":"Where purchases under this treatment are reported in Part II."},
+  {"fieldname":"column_break_3","fieldtype":"Column Break"},
+  {"fieldname":"faktur_code","fieldtype":"Data","label":"Faktur Transaction Code","description":"e-Faktur kode transaksi, e.g. 01 standard, 02 government collector, 07 not collected, 08 exempt."},
+  {"fieldname":"regional_rate","fieldtype":"Percent","label":"Regional Tax Rate (PBJT)","description":"For services taxed by the regency instead of PPN. Capped at 10% under UU HKPD."}
+ ],
+ "links": [], "modified": "2026-08-20 09:00:00.000000", "modified_by": "Administrator",
+ "module": "ES PPN ID", "name": "ES PPN Treatment", "naming_rule": "By fieldname", "owner": "Administrator",
+ "permissions": [{"create":1,"delete":1,"email":1,"export":1,"print":1,"read":1,"report":1,"role":"Accounts Manager","share":1,"write":1},{"read":1,"role":"Accounts User"}],
+ "sort_field": "modified", "sort_order": "DESC", "states": [], "track_changes": 1
+}

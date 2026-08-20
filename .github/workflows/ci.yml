@@ -1,0 +1,45 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+jobs:
+  lint:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Install linters
+        run: pip install ruff pytest
+
+      - name: Ruff
+        run: ruff check .
+
+      - name: Compile every module
+        run: python -m compileall -q es_ppn_id
+
+      - name: Unit tests
+        # Pure calculation and parsing helpers, no bench required. Anything
+        # touching the ORM is tested bench-side, not here.
+        run: python -m pytest tests -q
+
+      - name: Validate doctype and workspace JSON
+        run: |
+          python - <<'PY'
+          import json, pathlib, sys
+          bad = []
+          for path in pathlib.Path("es_ppn_id").rglob("*.json"):
+              try:
+                  json.loads(path.read_text())
+              except Exception as exc:
+                  bad.append(f"{path}: {exc}")
+          if bad:
+              print("\n".join(bad)); sys.exit(1)
+          print("all JSON parsed")
+          PY

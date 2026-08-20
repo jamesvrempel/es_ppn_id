@@ -1,0 +1,28 @@
+{
+ "actions": [], "allow_rename": 0, "creation": "2026-08-20 09:00:00.000000",
+ "doctype": "DocType", "editable_grid": 1, "engine": "InnoDB", "istable": 1,
+ "field_order": ["date","description","debit","credit","balance","row_hash","status","matched_rule","account","ppn_treatment","match_score","matched_voucher_type","matched_voucher","matched_party","bank_transaction","voucher_type","voucher","error"],
+ "fields": [
+  {"fieldname":"date","fieldtype":"Date","label":"Date","in_list_view":1,"columns":1},
+  {"fieldname":"description","fieldtype":"Small Text","label":"Description","in_list_view":1,"columns":3},
+  {"fieldname":"debit","fieldtype":"Currency","label":"Debit","in_list_view":1,"columns":1},
+  {"fieldname":"credit","fieldtype":"Currency","label":"Credit","in_list_view":1,"columns":1},
+  {"fieldname":"balance","fieldtype":"Currency","label":"Balance"},
+  {"fieldname":"row_hash","fieldtype":"Data","label":"Row Hash","read_only":1,"hidden":1},
+  {"fieldname":"status","fieldtype":"Select","label":"Status","options":"Pending\nImported\nDuplicate\nUnmatched\nIgnored\nMatched\nSettled\nPosted\nError","default":"Pending","in_list_view":1,"columns":1},
+  {"fieldname":"matched_rule","fieldtype":"Link","label":"Matched Rule","options":"ES ID Bank Rule","read_only":1},
+  {"fieldname":"account","fieldtype":"Link","label":"Account","options":"Account","in_list_view":1,"columns":2},
+  {"fieldname":"ppn_treatment","fieldtype":"Link","label":"PPN","options":"ES PPN Treatment","in_list_view":1,"columns":1},
+  {"fieldname":"match_score","fieldtype":"Int","label":"Match Score","read_only":1,"description":"Confidence that this line settles the invoice below."},
+  {"fieldname":"matched_voucher_type","fieldtype":"Link","label":"Candidate Type","options":"DocType","read_only":1},
+  {"fieldname":"matched_voucher","fieldtype":"Dynamic Link","label":"Candidate Invoice","options":"matched_voucher_type","read_only":1},
+  {"fieldname":"matched_party","fieldtype":"Data","label":"Candidate Party","read_only":1},
+  {"fieldname":"bank_transaction","fieldtype":"Link","label":"Bank Transaction","options":"Bank Transaction","read_only":1},
+  {"fieldname":"voucher_type","fieldtype":"Link","label":"Voucher Type","options":"DocType","read_only":1},
+  {"fieldname":"voucher","fieldtype":"Dynamic Link","label":"Voucher","options":"voucher_type","read_only":1},
+  {"fieldname":"error","fieldtype":"Small Text","label":"Error","read_only":1}
+ ],
+ "links": [], "modified": "2026-08-20 09:00:00.000000", "modified_by": "Administrator",
+ "module": "ES PPN ID", "name": "ES ID Bank Import Batch Row", "owner": "Administrator",
+ "permissions": [], "sort_field": "modified", "sort_order": "DESC", "states": []
+}

@@ -1,0 +1,37 @@
+{
+ "actions": [], "allow_rename": 1, "autoname": "field:rule_name",
+ "creation": "2026-08-20 09:00:00.000000", "doctype": "DocType", "engine": "InnoDB",
+ "field_order": ["rule_name","enabled","priority","company","column_break_match","match_type","pattern","direction","min_amount","max_amount","section_action","action","party_type","party","column_break_coding","account","cost_center","section_ppn","ppn_treatment","stop_processing","section_help","help_html"],
+ "fields": [
+  {"fieldname":"rule_name","fieldtype":"Data","label":"Rule Name","reqd":1,"unique":1,"in_list_view":1},
+  {"fieldname":"enabled","fieldtype":"Check","label":"Enabled","default":"1"},
+  {"fieldname":"priority","fieldtype":"Int","label":"Priority","default":"100","description":"Lower runs first. First match wins.","in_list_view":1},
+  {"fieldname":"company","fieldtype":"Link","label":"Company","options":"Company","description":"Leave blank to apply to all companies.","in_standard_filter":1},
+  {"fieldname":"column_break_match","fieldtype":"Column Break"},
+  {"fieldname":"match_type","fieldtype":"Select","label":"Match Type","options":"Contains\nDoes Not Contain\nStarts With\nExact\nRegex","default":"Contains","reqd":1},
+  {"fieldname":"pattern","fieldtype":"Data","label":"Pattern","reqd":1,"in_list_view":1,"description":"For non-regex types, spacing and punctuation are ignored, which is what makes bank descriptors match reliably."},
+  {"fieldname":"direction","fieldtype":"Select","label":"Direction","options":"Any\nDebit\nCredit","default":"Any"},
+  {"fieldname":"min_amount","fieldtype":"Currency","label":"Min Amount"},
+  {"fieldname":"max_amount","fieldtype":"Currency","label":"Max Amount"},
+  {"fieldname":"section_action","fieldtype":"Section Break","label":"Action"},
+  {"fieldname":"action","fieldtype":"Select","label":"Create","options":"Match Payment\nJournal Entry\nPurchase Invoice\nSales Invoice\nIgnore","default":"Journal Entry","reqd":1,"in_list_view":1,"description":"Match Payment settles an existing invoice and posts nothing else."},
+  {"fieldname":"party_type","fieldtype":"Link","label":"Party Type","options":"DocType","depends_on":"eval:['Journal Entry','Purchase Invoice','Sales Invoice'].includes(doc.action)"},
+  {"fieldname":"party","fieldtype":"Dynamic Link","label":"Party","options":"party_type","depends_on":"eval:['Journal Entry','Purchase Invoice','Sales Invoice'].includes(doc.action)"},
+  {"fieldname":"column_break_coding","fieldtype":"Column Break"},
+  {"fieldname":"account","fieldtype":"Link","label":"Account","options":"Account","depends_on":"eval:['Journal Entry','Purchase Invoice','Sales Invoice'].includes(doc.action)","description":"Expense account for debits, income account for credits."},
+  {"fieldname":"cost_center","fieldtype":"Link","label":"Cost Center","options":"Cost Center"},
+  {"fieldname":"section_ppn","fieldtype":"Section Break","label":"PPN"},
+  {"fieldname":"ppn_treatment","fieldtype":"Link","label":"PPN Treatment","options":"ES PPN Treatment","default":"PPN","depends_on":"eval:['Journal Entry','Purchase Invoice','Sales Invoice'].includes(doc.action)","in_list_view":1},
+  {"fieldname":"stop_processing","fieldtype":"Check","label":"Stop Processing Further Rules","default":"1","read_only":1},
+  {"fieldname":"section_help","fieldtype":"Section Break"},
+  {"fieldname":"help_html","fieldtype":"HTML","options":"<p class='text-muted'>Rules run in priority order. Company-specific rules outrank global rules at equal priority. Every line is offered to the payment matcher before the rules run, so a customer settling an invoice never needs a rule.</p>"}
+ ],
+ "index_web_pages_for_search": 1,
+ "links": [], "modified": "2026-08-20 09:00:00.000000", "modified_by": "Administrator",
+ "module": "ES PPN ID", "name": "ES ID Bank Rule", "naming_rule": "By fieldname", "owner": "Administrator",
+ "permissions": [
+  {"create":1,"delete":1,"email":1,"export":1,"print":1,"read":1,"report":1,"role":"Accounts Manager","share":1,"write":1},
+  {"read":1,"report":1,"role":"Accounts User"}
+ ],
+ "sort_field": "priority", "sort_order": "ASC", "states": [], "track_changes": 1
+}
